@@ -94,7 +94,7 @@ touch .env
 Add the following environment variables (update values accordingly):
 
 ```ini
-DATABASE_URL=postgresql://postgres:Venk@t1998@postgres_db:5432/nutribuddy
+DATABASE_URL=postgresql://postgres:your_pwd@postgres_db:5432/nutribuddy
 OPENAI_API_KEY=your_openai_api_key_here
 ```
 
@@ -128,6 +128,25 @@ npm start
 ```
 
 ---
+
+---
+
+## 🧠 Recommender Models
+
+### 🔹 Content-Based Filtering
+- Utilizes user profile data and item features (nutrient details, exercise attributes) to recommend personalized diets and exercises.
+- Compares items based on their attributes and recommends similar items based on user preferences.
+
+### 🔹 Item-Based Collaborative Filtering
+- Identifies similarities between different food items and exercises based on user interactions.
+- Suggests foods or exercises that are frequently chosen together by similar users.
+
+### 🔹 Hybrid Model
+- Combines content-based and collaborative filtering approaches to enhance recommendation accuracy.
+- Leverages user profiles, historical choices, and similar users’ preferences for better personalization.
+
+---
+
 
 ## 📞 API Endpoints
 
@@ -208,4 +227,15 @@ curl -X POST "http://127.0.0.1:8000/api/v1/llm/parse-disease-history" \
 ## 🎯 Conclusion
 
 🚀 **NutriBuddy is now yet to be functional with FastAPI, PostgreSQL, LLM disease extraction, and personalized diet recommendations!** Let me know if you need **further refinements**! 🔥
+
+
+
+
+
+
+
+
+
+
+
 
