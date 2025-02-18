@@ -220,7 +220,7 @@ curl -X POST "http://127.0.0.1:8000/api/v1/llm/parse-disease-history" \
 - **Deepak Udayakumar**
 - **Venkat Srinivasa Raghavan**
 
-💎 **Contact:** [venkatsr14@example.com](mailto:sraghavanvenkat@gmail.com)
+💎 **Contact:** [sraghavanvenkat@gmail.com](mailto:sraghavanvenkat@gmail.com)
 
 ---
 
