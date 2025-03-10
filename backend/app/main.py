@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.v1 import api_router
-from core.config import settings
+from app.api.v1.endpoints import api_router  # Ensure this is correct
+from app.core.config import settings
 
 app = FastAPI(
     title="NutriBuddy API",
@@ -9,18 +9,18 @@ app = FastAPI(
     version="1.0",
 )
 
-# Enable CORS (so frontend can access API)
+# ✅ Enable CORS (Allow requests from frontend)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change this to frontend domain for security
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Register API Routes
+# ✅ Register API routes
 app.include_router(api_router, prefix="/api/v1")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=settings.API_PORT)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
