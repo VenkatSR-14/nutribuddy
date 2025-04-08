@@ -100,14 +100,14 @@ nb_dev/
 ### 🔐 Login Page
 Navigate to the login screen and enter your credentials.
 
-![Login Page](./images/Login_Page.png)
+![Login Page](./Images/Login_Page.png)
 
 ---
 
 ### 📝 Signup Page
 Fill in your details to create an account.
 
-![Signup Page](./images/signup.png)
+![Signup Page](./Images/signup.png)
 
 ---
 
