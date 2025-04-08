@@ -100,28 +100,28 @@ nb_dev/
 ### 🔐 Login Page
 Navigate to the login screen and enter your credentials.
 
-![Login Page](./images/login_page.png)
+![Login Page](./images/Login_Page.png)
 
 ---
 
 ### 📝 Signup Page
 Fill in your details to create an account.
 
-![Signup Page](./images/signup_page.png)
+![Signup Page](./images/signup.png)
 
 ---
 
 ### 📊 Dashboard Page
 View your recommended meals and exercises. Interact with meals and refresh suggestions.
 
-![Dashboard Page](./images/dashboard_page.png)
+![Dashboard Page](./Images/Dashboard.png)
 
 ---
 
 ### ⚙️ Update Profile Page
 Update your weight, height, or medical history.
 
-![Update Profile Page](./images/update_profile_page.png)
+![Update Profile Page](./Images/update_profile.png)
 
 ---
 
