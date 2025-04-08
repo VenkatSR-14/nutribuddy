@@ -1,241 +1,143 @@
-### 📦 NutriBuddy - Setup & Installation Guide
+# NutriBuddy Application
 
-This repository contains the **NutriBuddy** application, a full-stack personalized diet and exercise recommendation system using FastAPI, PostgreSQL, and React.
-
----
-
-## 📈 Project Description & Purpose
-
-**NutriBuddy** is a **health and nutrition recommendation system** that:
-
-- ✅ **Allows users to sign up and update health details.**
-- ✅ **Uses PostgreSQL for structured storage.**
-- ✅ **Integrates with LLM (GPT-3.5) to extract diseases from medical history.**
-- ✅ **Recommends suitable diets based on preprocessed meal data.**
-- ✅ **Runs on Docker for easy deployment.**
-- ✅ **Includes a React-based frontend for user interaction.**
+NutriBuddy is a health and wellness application designed to parse user disease history, recommend personalized diets, and provide exercise recommendations. This application leverages **FastAPI** for the backend, **React** for the frontend, and **PostgreSQL** as the database, all orchestrated using **Docker Compose** for seamless deployment.
 
 ---
 
-## 📊 Dataset Details & Link
+## Features
 
-We use a preprocessed **Fitness Recommender Dataset** that includes nutritional data, exercise details, and disease-related dietary requirements.
+### Core Functionality
+1. **User Management**:
+   - Sign up with details like height, weight, gender, dietary preferences, and medical history.
+   - Login functionality with secure password hashing.
+   - Update profile details (height, weight, disease history).
+   - Change password securely.
 
-You can access the dataset here: [Fitness Recommender Dataset](https://www.kaggle.com/datasets/venkyy123/fitness-recommender-dataset/data)
+2. **Disease Parsing & Diet Recommendations**:
+   - Uses an LLM service to parse disease history and recommend personalized diets based on user input.
 
----
+3. **Exercise Recommendations**:
+   - Provides personalized exercise recommendations based on user BMI and preferences.
+   - Adds variability by randomly selecting exercises from predefined lists for each category to enhance user engagement.
 
-## 📂 Project Structure
+4. **Interactive Dashboard**:
+   - View meal and exercise recommendations.
+   - Interact with meals (like, dislike, buy) and refresh recommendations.
 
-```
-nutribuddy/
-│── backend/                     # Backend Service (FastAPI)
-│   ├── app/
-│   │   ├── api/                  # API Endpoints
-│   │   │   ├── v1/
-│   │   │   │   ├── endpoints/     # API Handlers (Users, LLM, Activities)
-│   │   ├── core/                  # Core Services (DB, Security, Config)
-│   │   ├── models/                # SQLAlchemy Models
-│   │   ├── services/              # Business Logic Services
-│   │   ├── main.py                # FastAPI Application Entry Point
-│── frontend/                     # React Frontend
-│   ├── src/
-│   │   ├── components/            # UI Components
-│   │   ├── pages/                 # Page Components
-│   │   ├── api/                   # API Calls
-│   ├── public/
-│   ├── package.json               # Frontend Dependencies
-│── data/                         # Preprocessed Data (CSV Files)
-│── db-scripts/                   # SQL Scripts (Schema & Data)
-│── docker-compose.yml            # Docker Config
-│── README.md                     # Project Documentation
-```
+### Technical Features
+- Fully containerized deployment using Docker Compose.
+- Backend API with endpoints for user management, disease parsing, diet recommendations, and exercise recommendations.
+- Frontend built with React for a seamless user experience.
+- PostgreSQL database for storing user data and recommendation results.
 
 ---
 
-## 🚀 Installation
+## Directory Structure
 
-### 1️⃣ Clone the Repository
+nb_dev/
+├── backend/ # FastAPI backend
+│ ├── app/
+│ │ ├── api/ # API routes
+│ │ ├── core/ # Core configurations
+│ │ ├── models/ # Database models
+│ │ ├── services/ # Business logic (LLM service, recommendation logic)
+│ │ └── main.py # Entry point for FastAPI
+├── frontend/ # React frontend
+│ ├── src/
+│ │ ├── components/ # React components (e.g., Login, Dashboard)
+│ │ ├── pages/ # Application pages
+│ │ └── App.tsx # Main React app file
+├── docker-compose.yml # Docker Compose configuration
+├── cleaned_meals.csv # Dataset for meal recommendations
+├── cleaned_exercise.csv # Dataset for exercise recommendations
+├── cleaned_recent_activity.csv # Dataset for user interactions
+└── README.md # Documentation (this file)
 
-```sh
-git clone https://github.com/VenkatSR-14/nutribuddy.git
-cd nutribuddy
-```
-
-### 2️⃣ Create and Activate Virtual Environment
-
-```sh
-python -m venv venv
-source venv/bin/activate  # On macOS/Linux
-venv\Scripts\activate     # On Windows
-```
-
-### 3️⃣ Install Dependencies
-
-```sh
-pip install -r requirements.txt
-```
-
-For frontend dependencies:
-
-```sh
-cd frontend
-npm install
-```
-
-### 4️⃣ Set Up Environment Variables
-
-Create a `.env` file in `backend/app/config/`:
-
-```sh
-touch .env
-```
-
-Add the following environment variables (update values accordingly):
-
-```ini
-DATABASE_URL=postgresql://postgres:your_pwd@postgres_db:5432/nutribuddy
-OPENAI_API_KEY=your_openai_api_key_here
-```
+text
 
 ---
 
-## 🛠️ Running the Application (Dockerized)
+## Setup Instructions
 
-### 1️⃣ Start PostgreSQL, Backend, and Frontend
+### Prerequisites
 
-```sh
-docker-compose up -d --build
-```
+- Docker and Docker Compose installed on your system.
+- Node.js (for local frontend development).
+- Python 3.10+ (for local backend development).
 
-### 2️⃣ Apply Database Migrations
+### Steps to Run the Application
 
-```sh
-docker exec -it postgres_db psql -U postgres -d nutribuddy -c "SELECT * FROM users;"
-```
+1. **Clone the Repository**:
+    ```
+    git clone https://github.com/VenkatSR-14/nb_dev.git
+    cd nb_dev
+    ```
 
-### 3️⃣ Run FastAPI Backend
+2. **Set Up Environment Variables**:
+    Create a `.env` file in the `backend` directory with the following variables:
+    ```
+    DATABASE_URL=postgresql://postgres:password@db:5432/nutribuddy_db
+    SECRET_KEY=your_secret_key_here
+    ```
 
-```sh
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
+3. **Run the Application with Docker Compose**:
+    ```
+    docker-compose up --build
+    ```
+    This will:
+    - Start the PostgreSQL database container.
+    - Start the FastAPI backend on `http://localhost:8000`.
+    - Start the React frontend on `http://localhost:3000`.
 
-### 4️⃣ Start the Frontend
-
-```sh
-cd frontend
-npm start
-```
-
----
-
----
-
-## 🧠 Recommender Models
-
-### 🔹 Content-Based Filtering
-- Utilizes user profile data and item features (nutrient details, exercise attributes) to recommend personalized diets and exercises.
-- Compares items based on their attributes and recommends similar items based on user preferences.
-
-### 🔹 Item-Based Collaborative Filtering
-- Identifies similarities between different food items and exercises based on user interactions.
-- Suggests foods or exercises that are frequently chosen together by similar users.
-
-### 🔹 Hybrid Model
-- Combines content-based and collaborative filtering approaches to enhance recommendation accuracy.
-- Leverages user profiles, historical choices, and similar users’ preferences for better personalization.
+4. **Access the Application**:
+    - Frontend: [http://localhost:3000](http://localhost:3000)
+    - Backend API docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ---
 
+## Deliverables
 
-## 📞 API Endpoints
+1. **Proposal & Presentation**:
+   - Available as PDF and PPT in the repository under `docs/`.
 
-| Method   | Endpoint                                     | Description                       |
-| -------- | -------------------------------------------- | --------------------------------- |
-| **POST** | /api/v1/users/signup                         | User Signup                       |
-| **PUT**  | /api/v1/users/update-user/{user\_id}         | Update User Profile               |
-| **POST** | /api/v1/llm/parse-disease-history            | Extract Diseases & Recommend Diet |
-| **POST** | /api/v1/activity/update-dashboard/{user\_id} | Log Recent Activity               |
+2. **Source Code**:
+   - Appropriately commented source code is available in this repository.
 
-For more details, check the API documentation at:
+3. **Sample Output**:
+   - Screenshots of the application are available in the `screenshots/` directory.
 
-```sh
-http://localhost:8000/docs
-```
+4. **Single-Page GitHub Guide**:
+   A single-page guide detailing how to set up and use this repository is included in this README under "Setup Instructions."
 
----
+5. **Discussion of Alternatives**:
+   The project could have been approached differently by using other technologies like Flask instead of FastAPI or MongoDB instead of PostgreSQL. These alternatives were not chosen due to performance considerations and compatibility with project requirements.
 
-## 🛠️ Tech Stack
-
-- **Backend:** FastAPI, SQLAlchemy, PostgreSQL, OpenAI GPT-3.5
-- **Frontend:** React (Material UI)
-- **Database:** PostgreSQL (Dockerized)
-- **Infrastructure:** Docker, Docker Compose
-- **Deployment:** GitHub, Uvicorn
+6. **Incomplete Areas (if any)**:
+   Any incomplete areas of the project will be documented in the final proposal along with reasons for incompletion.
 
 ---
 
-## 📊 Testing API with cURL
+## PostgreSQL Database Setup
 
-#### 1️⃣ User Signup
+The application uses PostgreSQL as its database management system. The database is managed within a Docker container via Docker Compose.
 
-```sh
-curl -X POST "http://127.0.0.1:8000/api/v1/users/signup" \
-     -H "Content-Type: application/json" \
-     -d '{"username": "testuser", "password": "securepass", "email": "test@example.com", "veg_non": true, "height": 170, "weight": 70, "disease": "hypertension"}'
-```
-
-#### 2️⃣ Disease Parsing & Diet Recommendation
-
-```sh
-curl -X POST "http://127.0.0.1:8000/api/v1/llm/parse-disease-history" \
-     -H "Content-Type: application/json" \
-     -d '{"history": "The patient has diabetes, hypertension, and kidney disease."}'
-```
+### Key Points:
+- The `docker-compose.yml` file defines a service named `db` for PostgreSQL.
+- The database connection string is configured using environment variables (`DATABASE_URL`) in `.env`.
+- All migrations or schema updates should be applied via SQLAlchemy models in the backend.
 
 ---
 
-## ✅ Features
+## How to Contribute
 
-- **✅ User Signup & Profile Management**
-- **✅ LLM Integration (GPT-3.5) for Disease Extraction**
-- **✅ Diet Recommendation Based on Preprocessed Data**
-- **✅ Dockerized PostgreSQL & FastAPI Backend**
-- **✅ React Frontend for User Interaction**
-- **✅ Logging Recent Activity on Dashboard Update**
-
----
-
-## 📝 Next Steps
-
-- [ ] **Enhance LLM to use embeddings for more accurate disease-diet matching**
-- [ ] **Implement JWT Authentication for Secure Login**
-- [ ] **Deploy on AWS/GCP using Docker Compose & Nginx**
+1. Fork this repository.
+2. Create a new branch for your feature or bug fix.
+3. Commit your changes with descriptive messages.
+4. Push your branch to your forked repository.
+5. Create a pull request to merge your changes into the main branch.
 
 ---
 
-## 💡 Contributors
+## License
 
-- **Aadarsh Gaikwad**
-- **Deepak Udayakumar**
-- **Venkat Srinivasa Raghavan**
-
-💎 **Contact:** [sraghavanvenkat@gmail.com](mailto:sraghavanvenkat@gmail.com)
-
----
-
-## 🎯 Conclusion
-
-🚀 **NutriBuddy is now yet to be functional with FastAPI, PostgreSQL, LLM disease extraction, and personalized diet recommendations!** Let me know if you need **further refinements**! 🔥
-
-
-
-
-
-
-
-
-
-
-
-
+This project is licensed under the MIT License.
