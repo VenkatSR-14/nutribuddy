@@ -24,11 +24,100 @@ const Signup = () => {
   const [weight, setWeight] = useState<string>("");
   const [vegNon, setVegNon] = useState<string>(""); // Boolean (true for veg, false for non-veg)
   const [gender, setGender] = useState<string>("");
+  const [showNoDiseaseMessage, setShowNoDiseaseMessage] = useState(false);
+  const [userNameError, setUserNameError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [heightError, setHeightError] = useState<string | null>(null);
+  const [weightError, setWeightError] = useState<string | null>(null);
+  const [diseaseError, setDiseaseError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const validatePassword = (password: string) => {
+    if (password.length < 8){
+      return "Password must be atleast 8 characters long";
+    }
+    return true;
+  };
+
+  const validateHeight = (height: string) => {
+    const heightValue = Number(height);
+    if (isNaN(heightValue) || heightValue < 50 || heightValue > 250){
+      return "Height value is abnormal, please check again";
+    }
+    return true;
+  }
+
+  const validateWeight = (weight: string) => {
+    const weightValue = Number(weight);
+    if (isNaN(weightValue) || weightValue < 20 || weightValue > 250){
+      return "Weight value is abnormal, please check again";
+    }
+    return true;
+  }
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      return "Invalid email format.";
+    }
+    return true;
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+
+    const passwordValidation = validatePassword(password);
+    if (passwordValidation !== true) {
+      setPasswordError(passwordValidation);
+      isValid = false;
+    } else {
+      setPasswordError(null);
+    }
+
+    const heightValidation = validateHeight(height);
+    if (heightValidation !== true){
+      setHeightError(heightValidation);
+      isValid = false;
+      
+    }
+    else{
+      setHeightError(null);
+    }
+
+    const weightValidation = validateWeight(weight);
+    if (weightValidation !== true){
+      setWeightError(weightValidation);
+      isValid = false;
+    }
+    else{
+      setWeightError(null);
+    }
+    
+    const emailValidation = validateEmail(email);
+    if (emailValidation !== true){
+      setEmailError(emailValidation);
+      isValid = false;
+    }
+    else{
+      setEmailError(null);
+    }
+    
+    if (disease === "No diseases detected.") {
+      setShowNoDiseaseMessage(true);
+    } else {
+      setShowNoDiseaseMessage(false);
+    }
+
+    return isValid;
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateForm()){
+      return
 
+    }
     try {
       const response = await axios.post(`${API_BASE_URL}/api/v1/users/signup`, {
         username,
@@ -50,9 +139,16 @@ const Signup = () => {
       // ✅ Store token & user ID in localStorage
       localStorage.setItem("token", loginResponse.data.access_token);
       localStorage.setItem("user_id", loginResponse.data.user_id);
+      // Store token & user ID in localStorage
+      localStorage.setItem("token", loginResponse.data.access_token);
+      localStorage.setItem("user_id", loginResponse.data.user_id);
+      localStorage.setItem("username", username);
+      localStorage.setItem("userHeight", height);
+      localStorage.setItem("userWeight", weight);
+      localStorage.setItem("userDietPreference", vegNon === "0" ? "vegetarian" : "non-vegetarian");
 
       // ✅ Redirect to Dashboard
-      navigate("/dashboard");
+      window.location.href = "/dashboard";
     } catch (error) {
       const axiosError = error as AxiosError;
       console.error("Signup failed", axiosError);
@@ -86,6 +182,8 @@ const Signup = () => {
             margin="normal"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            error = {!!passwordError}
+            helperText = {passwordError || ""}
             required
           />
           <TextField
@@ -95,6 +193,8 @@ const Signup = () => {
             margin="normal"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            error = {!!emailError}
+            helperText = {emailError || ""}
             required
           />
 
@@ -124,6 +224,11 @@ const Signup = () => {
             </Select>
           </FormControl>
 
+          {showNoDiseaseMessage && (
+            <Typography variant="body2" color="textSecondary" align="center" style={{ marginBottom: "10px" }}>
+              No disease detected using this dataset.
+            </Typography>
+          )}
           <TextField
             fullWidth
             label="Disease History"
@@ -141,6 +246,8 @@ const Signup = () => {
             margin="normal"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
+            error = {!!heightError}
+            helperText = {heightError || ""}
             required
           />
           <TextField
@@ -150,6 +257,8 @@ const Signup = () => {
             margin="normal"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
+            error = {!!weightError}
+            helperText = {weightError || ""}
             required
           />
 

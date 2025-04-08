@@ -70,3 +70,4 @@ def login_user(db: Session, username: str, password: str):
 # Function to update user details
 def update_user(db: Session, user_id: int, height: float, weight: float, disease: str, diet: str):
     return update_user_details(db, user_id, height, weight, disease, diet)
+
