@@ -34,26 +34,27 @@ NutriBuddy is a health and wellness application designed to parse user disease h
 
 ## Directory Structure
 
+```
 nb_dev/
-├── backend/ # FastAPI backend
-│ ├── app/
-│ │ ├── api/ # API routes
-│ │ ├── core/ # Core configurations
-│ │ ├── models/ # Database models
-│ │ ├── services/ # Business logic (LLM service, recommendation logic)
-│ │ └── main.py # Entry point for FastAPI
-├── frontend/ # React frontend
-│ ├── src/
-│ │ ├── components/ # React components (e.g., Login, Dashboard)
-│ │ ├── pages/ # Application pages
-│ │ └── App.tsx # Main React app file
-├── docker-compose.yml # Docker Compose configuration
-├── cleaned_meals.csv # Dataset for meal recommendations
-├── cleaned_exercise.csv # Dataset for exercise recommendations
+├── backend/                  # FastAPI backend
+│   ├── app/
+│   │   ├── api/              # API routes
+│   │   ├── core/             # Core configurations
+│   │   ├── models/           # Database models
+│   │   ├── services/         # Business logic (LLM service, recommendation logic)
+│   │   └── main.py           # Entry point for FastAPI
+├── frontend/                 # React frontend
+│   ├── src/
+│   │   ├── components/       # React components (e.g., Login, Dashboard)
+│   │   ├── pages/            # Application pages
+│   │   └── App.tsx           # Main React app file
+├── docker-compose.yml        # Docker Compose configuration
+├── cleaned_meals.csv         # Dataset for meal recommendations
+├── cleaned_exercise.csv      # Dataset for exercise recommendations
 ├── cleaned_recent_activity.csv # Dataset for user interactions
-└── README.md # Documentation (this file)
+└── README.md                 # Documentation (this file)
+```
 
-text
 
 ---
 
