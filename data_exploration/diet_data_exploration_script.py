@@ -64,6 +64,44 @@ def main():
         plt.tight_layout()
         plt.show()
 
+    # Advanced: Group by categorical columns and summarize
+    for col in cat_cols:
+        if diet_df[col].nunique() < 30:
+            print(f'\n--- Grouped Summary for {col} ---')
+            print(diet_df.groupby(col)[num_cols].mean())
+
+    # Advanced: Outlier detection using IQR for numeric columns
+    print('\n--- Outlier Detection (IQR Method) ---')
+    for col in num_cols:
+        Q1 = diet_df[col].quantile(0.25)
+        Q3 = diet_df[col].quantile(0.75)
+        IQR = Q3 - Q1
+        outliers = diet_df[(diet_df[col] < Q1 - 1.5 * IQR) | (diet_df[col] > Q3 + 1.5 * IQR)]
+        print(f'{col}: {len(outliers)} outliers')
+
+    # Advanced: Pairplot for numeric columns (if not too many)
+    if len(num_cols) > 1 and len(num_cols) <= 8:
+        sns.pairplot(diet_df[num_cols].dropna())
+        plt.suptitle('Pairplot of Numeric Features', y=1.02)
+        plt.show()
+
+    # Advanced: Missing value visualization
+    try:
+        import missingno as msno
+        msno.matrix(diet_df)
+        plt.title('Missing Values Matrix')
+        plt.show()
+        msno.heatmap(diet_df)
+        plt.title('Missing Values Heatmap')
+        plt.show()
+    except ImportError:
+        print('Install missingno for advanced missing value visualization (pip install missingno)')
+
+    # Save cleaned dataset (optional example)
+    cleaned_path = '../data/cleaned/diet_cleaned.csv'
+    diet_df.to_csv(cleaned_path, index=False)
+    print(f'\n--- Cleaned dataset saved to {cleaned_path} ---')
+
     print('\n--- Data Exploration Complete ---')
 
 if __name__ == '__main__':
