@@ -49,6 +49,7 @@ nutribuddy/
 
 ### Prerequisites
 - **Docker** & **Docker Compose** (for full-stack setup)
+- **PostgreSQL** (the Docker image is used, but having it locally is helpful for advanced DB work)
 - **Python 3.10+** (for backend development outside Docker)
 - **Node.js** (for local frontend development)
 
@@ -71,6 +72,11 @@ Run everything with Docker Compose:
 ```bash
 docker-compose up --build
 ```
+
+- **All database initialization and data loading scripts (`init.sql`, `load_data.sql`, etc.) will be executed automatically by the PostgreSQL container.**
+- **No manual database setup is required.**
+- The database schema, tables, and sample data will be created and loaded as soon as the containers start.
+
 - **Backend (FastAPI)**: [http://localhost:8000](http://localhost:8000)
 - **Frontend (React)**: [http://localhost:3000](http://localhost:3000)
 - **API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
