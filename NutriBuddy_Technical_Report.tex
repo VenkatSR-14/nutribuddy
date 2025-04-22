@@ -1,0 +1,86 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{setspace}
+
+% Page geometry
+\geometry{margin=1in}
+
+% Colors for code listings
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Code listing style
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codegreen},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{NutriBuddy: Final Project Report}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% Paragraph spacing
+\setlength{\parskip}{6pt}
+\onehalfspacing
+
+\title{NutriBuddy: Personalized Nutrition and Exercise Recommendation System\\
+\large Final Project Report}
+\author{Venkat Srinivasa Raghavan \and Deepak Udayakumar \and Aadarsh Gaikwad}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report presents NutriBuddy, an AI-driven personalized recommender system designed to deliver highly personalized meal recommendations based on user preferences, dietary restrictions, and real-time interactions. The system addresses key challenges in personalized nutrition, including the cold-start problem, evolving user preferences, lack of diversity, and community influence. Through a hybrid approach combining content-based filtering, collaborative filtering, dynamic re-ranking, and community-driven learning, we developed a comprehensive recommendation engine that balances personalization with diversity. Our experimental methodology involved systematic testing of individual recommendation techniques before integration into a hybrid model. Results demonstrate that the hybrid approach significantly outperformed individual methods, achieving higher precision (0.46), recall (0.91), and NDCG (0.75) scores. Dynamic re-ranking further enhanced user engagement, with notable improvements in click-through rates (48\% increase), purchase rates (61\% increase), and repeat engagement (38\% increase). This research contributes to the advancement of personalized nutrition systems by providing an adaptive framework that evolves with user preferences while maintaining recommendation diversity.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\end{document}
