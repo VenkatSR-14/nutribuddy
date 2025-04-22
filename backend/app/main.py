@@ -1,3 +1,4 @@
+# [Cascade PR Demo] This is a non-functional comment for PR demonstration.
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.endpoints import api_router  # Ensure this is correct

@@ -1,3 +1,4 @@
+// [Cascade PR Demo] No functional change. This comment is for PR demonstration purposes only.
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
