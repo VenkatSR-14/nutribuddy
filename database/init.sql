@@ -1,3 +1,7 @@
+-- [Cascade PR Demo] Added for PR demonstration. No SQL logic changed.
+-- This file initializes the NutriBuddy database with required tables and sample data.
+-- You can safely ignore these comments for production use.
+
 -- Drop Tables in Correct Order to Avoid Dependency Issues
 DROP TABLE IF EXISTS recommendations CASCADE;
 DROP TABLE IF EXISTS user_activity CASCADE;
@@ -23,7 +27,7 @@ CREATE TABLE IF NOT EXISTS users (
     gender BOOLEAN
 );
 
--- ✅ Ensure sequence starts at MAX(user_id) + 1
+-- Ensure sequence starts at MAX(user_id) + 1
 
 -- Recreate Meals Table
 CREATE TABLE IF NOT EXISTS meals (
